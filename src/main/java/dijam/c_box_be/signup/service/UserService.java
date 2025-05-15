@@ -17,9 +17,7 @@ public class UserService {
     }
 
     public void signup(UserDto userDto) {
-        // 유효성 검사 로직
-        validateMandatoryFields(userDto);
-
+        validateDuplicateUser(userDto);
         // DTO -> Entity 변환
         User user = User.builder()
                 .userId(userDto.getUserId())
@@ -34,14 +32,11 @@ public class UserService {
         signupRepository.save(user);
     }
 
-    // 필수 입력 값 확인
-    private void validateMandatoryFields(UserDto userDto) {
-        if (userDto.getUserId() == null || userDto.getUserId().isEmpty()) {
-            throw new IllegalArgumentException("userId는 필수 값입니다.");
-        }
-        if (userDto.getPassword() == null || userDto.getPassword().isEmpty()) {
-            throw new IllegalArgumentException("비밀번호는 필수 값입니다.");
-        }
-        // 다른 필드도 추가...
+    private void validateDuplicateUser(UserDto userDto) {
+        signupRepository.findByUserId(userDto.getUserId())
+                .ifPresent(user -> { throw new IllegalArgumentException("이미 존재하는 ID 입니다."); });//중복 이름 확인
+
+        signupRepository.findByPhoneNumber(userDto.getPhoneNumber())
+                .ifPresent(user -> { throw new IllegalArgumentException("이미 사용 중인 전화번호입니다."); }); //중복 전화번호 확인
     }
 }

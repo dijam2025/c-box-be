@@ -21,7 +21,7 @@ public class SignupController {
     @PostMapping("/signup")
     public ResponseEntity<String> signupUser(@RequestBody UserDto userDto) {
         try {
-            userService.signup(userDto); // 서비스에 등록 요청
+            userService.signup(userDto); // 서비스에 등록 요청l;
             return ResponseEntity.ok("회원가입 성공");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());

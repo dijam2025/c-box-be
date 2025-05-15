@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface SignupRepository extends JpaRepository<User, String> {
     Optional<User> findByUserId(String userId);
     Optional<User> findByPassword(String password);
-
     Optional<User> findByPhoneNumber(String s);
+
 }
