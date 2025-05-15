@@ -2,6 +2,7 @@ package dijam.c_box_be.login.service;
 
 import dijam.c_box_be.login.repository.LoginRepository;
 import dijam.c_box_be.signup.entity.User;
+import dijam.c_box_be.signup.repository.SignupRepository;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,14 +12,17 @@ import org.springframework.stereotype.Service;
 public class LoginService {
     private final LoginRepository loginRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final SignupRepository signupRepository;
 
-    public LoginService(LoginRepository loginRepository, BCryptPasswordEncoder passwordEncoder) {
+    public LoginService(LoginRepository loginRepository, BCryptPasswordEncoder passwordEncoder,
+                        SignupRepository signupRepository) {
         this.loginRepository = loginRepository;
         this.passwordEncoder = passwordEncoder;
+        this.signupRepository = signupRepository;
     }
 
     public User authenticate(String userId, String password) {
-        User user = loginRepository.findByUserId(userId)
+        User user = signupRepository.findByUserId(userId)
                 .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
@@ -27,5 +31,4 @@ public class LoginService {
 
         return user;
     }
-
 }

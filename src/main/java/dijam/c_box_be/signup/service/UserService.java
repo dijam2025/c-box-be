@@ -36,7 +36,7 @@ public class UserService {
         signupRepository.findByUserId(userDto.getUserId())
                 .ifPresent(user -> { throw new IllegalArgumentException("이미 존재하는 ID 입니다."); });//중복 이름 확인
 
-        signupRepository.findByPhoneNumber(userDto.getPhoneNumber())
-                .ifPresent(user -> { throw new IllegalArgumentException("이미 사용 중인 전화번호입니다."); }); //중복 전화번호 확인
+            signupRepository.findByPassword(userDto.getPassword())
+                .ifPresent(user -> { throw new IllegalArgumentException("이미 사용 중인 비밀번호입니다."); }); //중복 전화번호 확인
     }
 }
