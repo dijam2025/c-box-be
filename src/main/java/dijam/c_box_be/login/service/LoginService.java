@@ -10,13 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
-    private final LoginRepository loginRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final SignupRepository signupRepository;
 
-    public LoginService(LoginRepository loginRepository, BCryptPasswordEncoder passwordEncoder,
+    public LoginService(BCryptPasswordEncoder passwordEncoder,
                         SignupRepository signupRepository) {
-        this.loginRepository = loginRepository;
         this.passwordEncoder = passwordEncoder;
         this.signupRepository = signupRepository;
     }
