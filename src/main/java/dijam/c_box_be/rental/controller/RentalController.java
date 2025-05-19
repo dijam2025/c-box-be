@@ -15,9 +15,6 @@ public class RentalController {
 
     @PostMapping("/rent")
     public ResponseEntity<String> rent(@RequestBody RentalRequestDto dto) {
-        System.out.println("userId = " + dto.getUserId());
-        System.out.println("itemId = " + dto.getItemId());
-        System.out.println("item = " + dto.getItem());
         rentalService.rentItem(dto);
         return ResponseEntity.ok("대여 완료");
     }
