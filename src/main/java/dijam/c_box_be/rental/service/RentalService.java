@@ -49,7 +49,7 @@ public class RentalService {
         itemRepository.save(item);
 
         RentalHistory history = historyRepository
-                .findByUserIdAndItemIdAndReturnedAtIsNull(dto.getUserId(), dto.getItemId())
+                .findByUserIdAndItem_ItemIdAndReturnedAtIsNull(dto.getUserId(), dto.getItemId())
                 .orElseThrow(() -> new IllegalStateException("대여 기록이 없습니다."));
 
         history.setReturnedAt(LocalDateTime.now());
