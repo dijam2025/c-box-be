@@ -22,9 +22,7 @@ public class RentalController {
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
         }
-
-        dto.setUserId(user.getUserId()); // 여기서 userId 주입
-        rentalService.rentItem(dto);
+        rentalService.rentItem(user.getUserId(), dto.getItemId());
         return ResponseEntity.ok("대여 완료");
     }
 
@@ -35,9 +33,7 @@ public class RentalController {
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
         }
-
-        dto.setUserId(user.getUserId()); // 여기서 userId 주입
-        rentalService.returnItem(dto);
+        rentalService.returnItem(user.getUserId(), dto.getItemId());
         return ResponseEntity.ok("반납 완료");
     }
 }
