@@ -18,18 +18,27 @@ public class RentalService {
     private final RentalHistoryRepository historyRepository;
 
     public void rentItem(RentalRequestDto dto) {
-        Item item = itemRepository.findById(dto.getItemId())
-                .orElseThrow(() -> new IllegalArgumentException("물품이 없습니다"));
+        System.out.println("rentItem 진입: itemId = " + dto.getItemId());
 
-        if (item.isRented()) {
-            throw new IllegalStateException("대여 중입니다");
+        try {
+            Item item = itemRepository.findById(dto.getItemId())
+                    .orElseThrow(() -> new IllegalArgumentException("물품이 없습니다"));
+
+            if (item.isRented()) {
+                throw new IllegalStateException("이미 대여 중입니다");
+            }
+
+            item.setRented(true);
+            itemRepository.save(item);
+
+            RentalHistory history = new RentalHistory(dto.getUserId(), item, LocalDateTime.now(), null);
+            historyRepository.save(history);
+
+            System.out.println("대여 처리 완료");
+        } catch (Exception e) {
+            System.out.println("예외 발생: " + e.getMessage());
+            throw e;
         }
-
-        item.setRented(true);
-        itemRepository.save(item);
-
-        RentalHistory history = new RentalHistory(dto.getUserId(), item, LocalDateTime.now(), null);
-        historyRepository.save(history);
     }
 
     public void returnItem(RentalRequestDto dto) {
@@ -40,7 +49,7 @@ public class RentalService {
         itemRepository.save(item);
 
         RentalHistory history = historyRepository
-                .findByUserIdAndItemIdAndReturnedAtIsNull(dto.getUserId(), dto.getItemId())
+                .findByUserIdAndItem_ItemIdAndReturnedAtIsNull(dto.getUserId(), dto.getItemId())
                 .orElseThrow(() -> new IllegalStateException("대여 기록이 없습니다."));
 
         history.setReturnedAt(LocalDateTime.now());

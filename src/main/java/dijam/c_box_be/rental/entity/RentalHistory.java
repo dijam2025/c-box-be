@@ -14,11 +14,12 @@ public class RentalHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long itemId;
+    private Long rentalHistoryId;
 
     private String userId;
 
     @ManyToOne
+    @JoinColumn(name = "item_id")
     private Item item;
 
     private LocalDateTime rentedAt;
