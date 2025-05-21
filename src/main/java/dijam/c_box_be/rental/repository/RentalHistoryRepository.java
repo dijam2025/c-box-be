@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface RentalHistoryRepository extends JpaRepository<RentalHistory, Long> {
     Optional<RentalHistory> findByUserIdAndItem_ItemIdAndReturnedAtIsNull(String userId, Long itemId);
-    List<RentalHistory> findByUserId(String userId);
+    List<RentalHistory> findByUserIdAndReturnedAtIsNull(String userId);
 
 }
 
