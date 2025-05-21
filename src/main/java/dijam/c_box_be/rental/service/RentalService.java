@@ -1,10 +1,8 @@
 package dijam.c_box_be.rental.service;
 
 import dijam.c_box_be.rental.dto.RentalRequestDto;
-import dijam.c_box_be.rental.entity.Item;
-import dijam.c_box_be.rental.entity.RentalHistory;
-import dijam.c_box_be.rental.repository.ItemRepository;
-import dijam.c_box_be.rental.repository.RentalHistoryRepository;
+import dijam.c_box_be.rental.entity.*;
+import dijam.c_box_be.rental.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
