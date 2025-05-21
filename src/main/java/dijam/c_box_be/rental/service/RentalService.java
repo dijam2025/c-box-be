@@ -1,11 +1,14 @@
 package dijam.c_box_be.rental.service;
-import dijam.c_box_be.rental.dto.RentalRequestDto;
+import dijam.c_box_be.rental.dto.*;
 import dijam.c_box_be.rental.entity.*;
 import dijam.c_box_be.rental.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +35,44 @@ public class RentalService {
 
         System.out.println("대여 처리 완료");
     }
+
+    public List<RentalStatusDto> getUserRentalHistories(String userId, String role) {
+        List<RentalHistory> histories = historyRepository.findByUserId(userId);
+
+
+        return histories.stream()
+                .map(h -> {
+                    LocalDateTime rentedAt = h.getRentedAt();
+                    LocalDateTime dueDate = rentedAt.plusDays(7);
+                    LocalDateTime now = LocalDateTime.now();
+
+                    long daysLeft = java.time.Duration.between(now, dueDate).toDays();
+
+                    String statusMessage;
+                    if (h.getReturnedAt() != null) {
+                        statusMessage = "반납 완료";
+                    } else if (daysLeft < 0) {
+                        statusMessage = "반납 기한이 지났습니다.";
+                        daysLeft = 0;
+                    } else {
+                        statusMessage = "반납까지 " + daysLeft + "일 남았습니다.";
+                    }
+
+                    return new RentalStatusDto(
+                            h.getItem().getItemId(),
+                            h.getItem().getItem(), // 이름
+                            h.getUserId(),
+                            role,
+                            rentedAt,
+                            dueDate,
+                            h.getReturnedAt(),
+                            daysLeft,
+                            statusMessage
+                    );
+                })
+                .collect(Collectors.toList());
+    }
+
 
     public void returnItem(String userId, Long itemId) {
         Item item = itemRepository.findById(itemId)

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rental")
@@ -36,5 +38,22 @@ public class RentalController {
         rentalService.returnItem(user.getUserId(), dto.getItemId());
         return ResponseEntity.ok("반납 완료");
     }
+
+    @GetMapping("/mypage")
+    public ResponseEntity<List<RentalStatusDto>> getMyPageRentalStatus(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        String userId = user.getUserId();
+        String role = user.getRole();
+
+        // 대여 내역 전체 조회
+        List<RentalStatusDto> rentalStatuses = rentalService.getUserRentalHistories(userId, role);
+        return ResponseEntity.ok(rentalStatuses);
+    }
+
+
 }
 
