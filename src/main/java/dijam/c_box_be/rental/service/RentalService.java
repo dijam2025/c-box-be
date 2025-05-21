@@ -44,7 +44,16 @@ public class RentalService {
                 .findByUserIdAndItem_ItemIdAndReturnedAtIsNull(userId, itemId)
                 .orElseThrow(() -> new IllegalStateException("대여 기록이 없습니다."));
 
-        history.setReturnedAt(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        if (history.getRentedAt().plusDays(7).isBefore(now)) {
+            throw new IllegalStateException("반납 기한(7일)이 초과되었습니다.");
+        }
+
+        // 반납 처리
+        item.setRented(false);
+        itemRepository.save(item);
+
+        history.setReturnedAt(now);
         historyRepository.save(history);
     }
 }
