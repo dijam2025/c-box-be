@@ -53,7 +53,4 @@ public class RentalController {
         List<RentalStatusDto> rentalStatuses = rentalService.getUserRentalHistories(userId, role);
         return ResponseEntity.ok(rentalStatuses);
     }
-
-
 }
-

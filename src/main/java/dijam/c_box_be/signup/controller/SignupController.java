@@ -25,4 +25,17 @@ public class SignupController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable String userId) {
+        try {
+            userService.deleteUser(userId);
+            return ResponseEntity.ok("회원탈퇴 성공");
+        } catch (Exception e) {
+            e.printStackTrace(); // <<< 여기가 핵심! 전체 스택트레이스 출력
+            return ResponseEntity.status(500).body("서버 에러 발생: " + e.getMessage());
+        }
+    }
+
+
 }

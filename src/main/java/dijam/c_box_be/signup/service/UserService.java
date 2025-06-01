@@ -3,6 +3,7 @@ package dijam.c_box_be.signup.service;
 import dijam.c_box_be.signup.dto.UserDto;
 import dijam.c_box_be.signup.entity.User;
 import dijam.c_box_be.signup.repository.SignupRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,4 +40,14 @@ public class UserService {
             signupRepository.findByPassword(userDto.getPassword())
                 .ifPresent(user -> { throw new IllegalArgumentException("이미 사용 중인 비밀번호입니다."); }); //중복 전화번호 확인
     }
+
+    @Transactional
+    public void deleteUser(String userId) {
+        signupRepository.deleteByUserId(userId);
+    }
+
+    public boolean userExists(String userId) {
+        return signupRepository.findByUserId(userId).isPresent();
+    }
+
 }
