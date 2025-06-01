@@ -5,6 +5,7 @@ import lombok.*;
 @Getter
 @Setter
 public class MissionRequestDto {
+    private String userId;
     private String category;
     private String title;
 }

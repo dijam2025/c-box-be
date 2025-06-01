@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rental")
+@CrossOrigin(origins = "http://localhost:8080")
 public class RentalController {
 
     private final RentalService rentalService;
