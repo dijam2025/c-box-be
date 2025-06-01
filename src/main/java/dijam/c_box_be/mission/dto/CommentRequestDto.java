@@ -4,8 +4,8 @@ import lombok.*;
 
 @Getter
 @Setter
-public class MissionRequestDto {
+public class CommentRequestDto {
+    private Long missionId;
     private String userId;
-    private String category;
-    private String title;
+    private String content;
 }

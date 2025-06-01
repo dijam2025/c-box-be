@@ -6,12 +6,9 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class MissionResponseDto {
-    private Long mission;
+public class CommentResponseDto {
+    private Long commentId;
     private String userId;
-    private String category;
-    private String title;
-    private int comments;
+    private String content;
     private LocalDateTime createdAt;
 }
-

@@ -27,6 +27,7 @@ public class MissionService {
 
     public MissionResponseDto createMission(MissionRequestDto dto) {
         Mission mission = Mission.builder()
+                .userId(dto.getUserId())
                 .title(dto.getTitle())
                 .category(dto.getCategory())
                 .createdAt(LocalDateTime.now())
@@ -42,6 +43,7 @@ public class MissionService {
 
     private MissionResponseDto toDto(Mission mission) {
         return new MissionResponseDto(
+                mission.getMission(),
                 mission.getUserId(),
                 mission.getCategory(),
                 mission.getTitle(),
