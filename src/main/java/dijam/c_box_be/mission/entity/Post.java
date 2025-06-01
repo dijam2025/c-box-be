@@ -17,6 +17,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String userid;
     private String category;     // 예: 수업, 요청, 기타
     private String title;
     private Integer comments = 0;
