@@ -13,6 +13,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
 
+    private String userId;
     private String item;
     private boolean rented;
 }
