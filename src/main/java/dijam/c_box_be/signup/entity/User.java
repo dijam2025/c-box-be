@@ -29,6 +29,6 @@ public class User {
     @Column(name = "role", nullable = false, length = 20) // 직책
     private String role;
 
-    @Column(name = "creat_at", nullable = false, length = 20)
+    @Column(name = "creat_at", nullable = false, length = 50)
     private String creatAt; // 정확한 이름 사용
 }
