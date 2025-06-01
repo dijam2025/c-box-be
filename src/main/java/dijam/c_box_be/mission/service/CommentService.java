@@ -21,6 +21,9 @@ public class CommentService {
         Mission mission = missionRepository.findByMission(dto.getMissionId())
                 .orElseThrow(() -> new RuntimeException("Mission not found"));
 
+        mission.setComments(mission.getComments() + 1);
+        missionRepository.save(mission);
+
         Comment comment = Comment.builder()
                 .userId(dto.getUserId())
                 .content(dto.getContent())
