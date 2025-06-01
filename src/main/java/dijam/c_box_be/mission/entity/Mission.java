@@ -20,6 +20,7 @@ public class Mission {
     private String userId;
     private String category;     // 예: 수업, 요청, 기타
     private String title;
+    @Builder.Default
     private Integer comments = 0;
 
     @Column(name = "created_at")
