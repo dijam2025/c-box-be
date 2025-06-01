@@ -6,18 +6,18 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "posts")
+@Table(name = "missions")
 @Getter
 @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Builder
-public class Post {
+public class Mission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long mission;
 
-    private String userid;
+    private String userId;
     private String category;     // 예: 수업, 요청, 기타
     private String title;
     private Integer comments = 0;

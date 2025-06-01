@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class PostResponseDto {
+public class MissionResponseDto {
     private String userId;
     private String category;
     private String title;

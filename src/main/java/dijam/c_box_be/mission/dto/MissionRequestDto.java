@@ -4,7 +4,7 @@ import lombok.*;
 
 @Getter
 @Setter
-public class PostRequestDto {
+public class MissionRequestDto {
     private String category;
     private String title;
 }
