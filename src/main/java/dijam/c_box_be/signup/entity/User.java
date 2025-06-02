@@ -36,7 +36,7 @@ public class User {
     private String createdAt; // 정확한 이름 사용
 
     @PrePersist
-    protected void onCreate() {
+    protected void onCreated_at() {
         this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }
