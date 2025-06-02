@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://172.31.99.25:8080")
+@CrossOrigin(origins = "http://localhost:8080")
 public class LoginController {
 
     private final LoginService loginService;
