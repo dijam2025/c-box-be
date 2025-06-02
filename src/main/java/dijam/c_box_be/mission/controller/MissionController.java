@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/missions")
-@CrossOrigin(origins = "http://10.0.2.2:8080")
+@CrossOrigin(origins = "http://172.31.99.25:8080")
 @RequiredArgsConstructor
 public class MissionController {
 

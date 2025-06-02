@@ -23,7 +23,6 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "mission_id")
     private Mission mission;
-
     private String content;
 
     @Column(name = "created_at")
