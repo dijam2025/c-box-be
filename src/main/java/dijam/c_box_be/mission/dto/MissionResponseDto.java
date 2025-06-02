@@ -11,6 +11,7 @@ public class MissionResponseDto {
     private String userId;
     private String category;
     private String title;
+    private Long text;
     private int comments;
     private LocalDateTime createdAt;
 }

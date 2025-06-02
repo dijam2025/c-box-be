@@ -20,6 +20,7 @@ public class Mission {
     private String userId;
     private String category;     // 예: 수업, 요청, 기타
     private String title;
+    private Long text;
     @Builder.Default
     private Integer comments = 0;
 

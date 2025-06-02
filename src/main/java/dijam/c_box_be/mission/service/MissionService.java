@@ -47,6 +47,7 @@ public class MissionService {
                 mission.getUserId(),
                 mission.getCategory(),
                 mission.getTitle(),
+                mission.getText(),
                 mission.getComments(),
                 mission.getCreatedAt()
         );
