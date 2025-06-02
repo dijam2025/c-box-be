@@ -30,6 +30,7 @@ public class MissionService {
                 .userId(dto.getUserId())
                 .title(dto.getTitle())
                 .category(dto.getCategory())
+                .text(dto.getText())
                 .createdAt(LocalDateTime.now())
                 .comments(0)
                 .build();

@@ -8,5 +8,5 @@ public class MissionRequestDto {
     private String userId;
     private String category;
     private String title;
-    private Long text;
+    private String text;
 }
