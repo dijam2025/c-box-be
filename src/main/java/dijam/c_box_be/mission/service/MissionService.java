@@ -24,6 +24,13 @@ public class MissionService {
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
+    public List<MissionResponseDto> getMissionsByUserId(String userId) {
+        return missionRepository.findByUserId(userId, Sort.by(Sort.Direction.DESC, "createdAt"))
+                .stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
 
     public MissionResponseDto createMission(MissionRequestDto dto) {
         Mission mission = Mission.builder()
