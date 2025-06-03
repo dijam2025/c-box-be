@@ -31,10 +31,12 @@ public class MyPageService {
                 .map(h -> {
                     LocalDateTime rentedAt = h.getRentedAt();
                     LocalDateTime dueDate = rentedAt.plusDays(7);
+                    LocalDateTime returnedAt = h.getReturnedAt();
                     long daysLeft = Duration.between(LocalDateTime.now(), dueDate).toDays();
 
-                    String status = (h.getReturnedAt() != null) ? "반납 완료" :
-                            (daysLeft < 0) ? "반납 기한이 지났습니다." : "반납까지 " + daysLeft + "일 남았습니다.";
+                    String status = (returnedAt != null)
+                            ? "반납 완료" + (dueDate.isBefore(returnedAt) ? " (기한 초과)" : "")
+                            : (daysLeft < 0 ? "반납 기한 초과" : "반납까지 " + daysLeft + "일 남음");
 
                     return new MyPageRentalDto(
                             h.getItem().getItemId(),
