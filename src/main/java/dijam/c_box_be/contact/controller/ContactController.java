@@ -4,7 +4,10 @@ import dijam.c_box_be.contact.dto.ContactRequest;
 import dijam.c_box_be.contact.entity.Contact;
 import dijam.c_box_be.contact.repository.ContactRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -24,5 +27,9 @@ public class ContactController {
 
         contactRepository.save(contact);
         return "문의가 접수되었습니다.";
+    }
+    @GetMapping("/contact")
+    public List<Contact> getAllContacts() {
+        return contactRepository.findAll();
     }
 }
