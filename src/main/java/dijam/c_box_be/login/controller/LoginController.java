@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -21,15 +23,23 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest request, HttpSession session) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request, HttpSession session) {
         try {
             User user = loginService.authenticate(request.getUserId(), request.getPassword());
-            session.setAttribute("user", user); // 세션 저장
-            return ResponseEntity.ok("로그인 성공");
+            session.setAttribute("user", user);
+
+            // ✅ JSON으로 응답 구성
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "로그인 성공");
+            response.put("role", user.getRole()); // 예: "ADMIN"
+
+            return ResponseEntity.ok(response);
         } catch (BadCredentialsException | UsernameNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body(Map.of("message", e.getMessage()));
         }
     }
+
 
     @PutMapping("/logout")
     public ResponseEntity<String> logout(HttpSession session) {
