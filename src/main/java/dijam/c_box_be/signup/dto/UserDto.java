@@ -12,5 +12,5 @@ public class UserDto {
     private String phoneNumber;
     private String email;
     private String role;
-    private String creatAt;
+    private String createdAt;
 }
