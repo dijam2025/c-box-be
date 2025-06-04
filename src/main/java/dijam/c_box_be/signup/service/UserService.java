@@ -27,7 +27,7 @@ public class UserService {
                 .phoneNumber(userDto.getPhoneNumber())
                 .email(userDto.getEmail())
                 .role(userDto.getRole())
-                .createdAt(userDto.getCreatAt())
+                .createdAt(userDto.getCreatedAt())
                 .build();
 
         signupRepository.save(user);
