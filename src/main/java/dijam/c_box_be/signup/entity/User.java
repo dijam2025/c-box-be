@@ -2,13 +2,16 @@ package dijam.c_box_be.signup.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "User")
+@Table(name = "user")
 public class User {
     @Id
     @Column(name = "user_id", unique = true, nullable = false, length = 20)
@@ -29,6 +32,11 @@ public class User {
     @Column(name = "role", nullable = false, length = 20) // 직책
     private String role;
 
-    @Column(name = "creat_at", nullable = false, length = 50)
-    private String creatAt; // 정확한 이름 사용
+    @Column(name = "created_at", nullable = false, length = 50)
+    private String createdAt; // 정확한 이름 사용
+
+    @PrePersist
+    protected void onCreated_at() {
+        this.createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 }

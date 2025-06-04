@@ -1,17 +1,14 @@
-package dijam.c_box_be.rental.dto;
+package dijam.c_box_be.mypage.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @AllArgsConstructor
-public class RentalStatusDto {
+public class MyPageRentalDto {
     private Long itemId;
     private String item;
-    private String userId;
-    private String role;
     private LocalDateTime rentedAt;
     private LocalDateTime dueDate;
     private LocalDateTime returnedAt;
