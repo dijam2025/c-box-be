@@ -3,7 +3,7 @@ package dijam.c_box_be.signup.service;
 import dijam.c_box_be.signup.dto.UserDto;
 import dijam.c_box_be.signup.entity.User;
 import dijam.c_box_be.signup.repository.SignupRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -43,11 +43,9 @@ public class UserService {
 
     @Transactional
     public void deleteUser(String userId) {
-        signupRepository.deleteByUserId(userId);
-    }
-
-    public boolean userExists(String userId) {
-        return signupRepository.findByUserId(userId).isPresent();
+        User user = signupRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 회원이 존재하지 않습니다."));
+        signupRepository.deleteByUserId(user.getUserId());
     }
 
 }
