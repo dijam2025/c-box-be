@@ -7,5 +7,6 @@ import lombok.Setter;
 @Setter
 public class RentalRequestDto {
     private Long itemId;
+    private String userId;
     private String item;
 }
