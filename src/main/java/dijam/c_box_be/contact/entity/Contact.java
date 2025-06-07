@@ -21,6 +21,6 @@ public class Contact {
     private String email;
     @Column(columnDefinition = "TEXT")
     private String contactText;
-
+    @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 }

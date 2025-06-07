@@ -4,6 +4,8 @@ import dijam.c_box_be.config.JwtUtil;
 import dijam.c_box_be.login.dto.LoginRequest;
 import dijam.c_box_be.login.service.LoginService;
 import dijam.c_box_be.signup.entity.User;
+
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:8080")
 public class LoginController {
 
     private final LoginService loginService;
@@ -39,6 +39,14 @@ public class LoginController {
             ));
         } catch (BadCredentialsException | UsernameNotFoundException e) {
             return ResponseEntity.status(401).body(Map.of("message", e.getMessage()));
+
         }
     }
+
+
+
+
+
+
+
 }

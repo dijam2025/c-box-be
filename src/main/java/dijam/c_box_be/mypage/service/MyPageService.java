@@ -41,6 +41,7 @@ public class MyPageService {
                     return new MyPageRentalDto(
                             h.getItem().getItemId(),
                             h.getItem().getItem(),
+                            userId,
                             rentedAt,
                             dueDate,
                             h.getReturnedAt(),
