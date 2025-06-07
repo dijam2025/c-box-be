@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class MyPageRentalDto {
     private Long itemId;
     private String item;
+    private String userId;
     private LocalDateTime rentedAt;
     private LocalDateTime dueDate;
     private LocalDateTime returnedAt;
