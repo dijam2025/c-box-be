@@ -32,6 +32,7 @@ public class LoginController {
             Map<String, String> response = new HashMap<>();
             response.put("message", "로그인 성공");
             response.put("role", user.getRole()); // 예: "ADMIN"
+            response.put("name", user.getName());
 
             return ResponseEntity.ok(response);
         } catch (BadCredentialsException | UsernameNotFoundException e) {
