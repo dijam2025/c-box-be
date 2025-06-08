@@ -7,21 +7,16 @@ import org.springframework.web.socket.config.annotation.*;
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
-
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
-        // 메시지 받을 prefix
-        config.enableSimpleBroker("/sub");
-        // 메시지 보낼 prefix
-        config.setApplicationDestinationPrefixes("/pub");
+    public void configureMessageBroker(MessageBrokerRegistry registry) {
+        registry.enableSimpleBroker("/sub"); // 클라이언트 수신 주소
+        registry.setApplicationDestinationPrefixes("/pub"); // 클라이언트 송신 주소
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        // 클라이언트가 WebSocket 연결 시 사용할 엔드포인트
-        registry.addEndpoint("/ws-chat")
-                .setAllowedOriginPatterns("*") // CORS 허용
+        registry.addEndpoint("/ws-chat") // Flutter 클라이언트가 연결할 주소
+                .setAllowedOriginPatterns("*")
                 .withSockJS();
     }
 }
-
