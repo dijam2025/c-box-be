@@ -27,4 +27,3 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getCommentsByMission(missionId));
     }
 }
-
